@@ -3,51 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
 <title>Carneiro Run · Maratona</title>
 <meta name="description" content="Vídeo na íntegra da maratona Carneiro Run.">
 <meta property="og:title" content="Carneiro Run · Maratona">
 <meta property="og:description" content="Assista ao vídeo na íntegra.">
-<meta property="og:image" content="carneiro.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;700;800&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@700;800&family=Barlow:wght@400;500&display=swap">
 <style>
   :root {
-    --bg: #070d13;
-    --surface: #0e1822;
+    --bg: #000;
+    --surface: #0b141c;
     --line: #1b2a38;
     --fg: #eef4f8;
     --muted: #8fa3b3;
     --accent: #00aeef;
+    --ink: #04121c;
     --display: "Saira Semi Condensed", "Arial Narrow", system-ui, sans-serif;
     --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
     color-scheme: dark;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--fg); }
-  body {
-    font-family: var(--body);
-    font-size: 16px;
-    line-height: 1.5;
+  body { font-family: var(--body); font-size: 16px; line-height: 1.5; }
+
+  /* VÍDEO: ocupa a tela inteira do celular, já em pé (9:16) */
+  .stage {
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+  }
+  .frame {
+    height: 100%;
+    width: 100%;
+    max-width: calc(100svh * 9 / 16);
+    position: relative;
+  }
+  .frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #000;
+  }
+
+  /* INFO abaixo do vídeo */
+  .info {
+    max-width: 480px;
+    margin: 0 auto;
+    padding-block: 32px calc(32px + env(safe-area-inset-bottom, 0px));
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    background:
-      radial-gradient(120% 60% at 50% -10%, rgba(0,174,239,.16), transparent 60%),
-      var(--bg);
-    min-height: 100vh;
-  }
-  .wrap {
-    max-width: 720px;
-    margin: 0 auto;
-    padding-block: 40px 32px;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 22px;
+    text-align: center;
   }
   .logo {
-    width: min(78%, 320px);
+    width: min(70%, 280px);
     margin: 0 auto;
     aspect-ratio: 584 / 172;
     overflow: hidden;
@@ -61,110 +80,60 @@
     top: 0;
     margin-top: -149.66%;
   }
-  .head { text-align: center; display: flex; flex-direction: column; gap: 6px; }
-  .eyebrow {
-    font-family: var(--display);
-    font-weight: 700;
-    font-style: italic;
-    letter-spacing: .22em;
-    font-size: 13px;
-    color: var(--accent);
-    text-transform: uppercase;
-  }
   h1 {
     margin: 0;
     font-family: var(--display);
     font-weight: 800;
     font-style: italic;
-    font-size: clamp(40px, 13vw, 64px);
-    line-height: .95;
+    font-size: clamp(36px, 11vw, 52px);
+    line-height: 1;
     text-transform: uppercase;
   }
-  .km {
-    font-family: var(--display);
-    color: var(--muted);
-    font-size: 15px;
-    letter-spacing: .04em;
-  }
-  .player {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-  .screen {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    background: #000;
-  }
-  .screen iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  .alt {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 14px 18px;
-    color: var(--fg);
+  .btn {
+    display: block;
+    padding: 16px 20px;
+    border-radius: 12px;
+    background: var(--accent);
+    color: var(--ink);
     text-decoration: none;
-  }
-  .alt span { color: var(--muted); font-size: 14px; }
-  .alt strong {
     font-family: var(--display);
     font-weight: 700;
     font-style: italic;
+    font-size: 18px;
     text-transform: uppercase;
-    letter-spacing: .02em;
-    color: var(--accent);
-    white-space: nowrap;
+    letter-spacing: .03em;
   }
-  .alt:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-  .tip { margin: 0; color: var(--muted); font-size: 14px; text-align: center; }
+  .btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+  .tip { margin: 0; color: var(--muted); font-size: 14px; }
   footer {
-    text-align: center;
     color: var(--muted);
     font-size: 12px;
     letter-spacing: .08em;
     text-transform: uppercase;
-    padding-top: 8px;
+    padding-top: 14px;
     border-top: 1px solid var(--line);
   }
 </style>
 </head>
 <body>
-<main class="wrap">
-  <div class="logo">
-    <img src="carneiro.png" alt="Carneiro Run">
+
+<section class="stage">
+  <div class="frame">
+    <iframe
+      src="https://drive.google.com/file/d/1ThdGfZ3WY53U97byx2wXh06xcu1AXNBZ/preview"
+      title="Carneiro Run · Maratona"
+      allow="autoplay; fullscreen"
+      allowfullscreen></iframe>
   </div>
+</section>
 
-  <header class="head">
-    <div class="eyebrow">Vídeo na íntegra</div>
-    <h1>Maratona</h1>
-    <div class="km">42,195 km</div>
-  </header>
-
-  <section class="player">
-    <div class="screen">
-      <iframe
-        src="https://drive.google.com/file/d/1ThdGfZ3WY53U97byx2wXh06xcu1AXNBZ/preview"
-        title="Vídeo Carneiro Run Maratona"
-        allow="autoplay; fullscreen"
-        allowfullscreen></iframe>
-    </div>
-    <a class="alt" href="https://drive.google.com/file/d/1ThdGfZ3WY53U97byx2wXh06xcu1AXNBZ/view?usp=sharing" target="_blank" rel="noopener">
-      <span>Não carregou?</span>
-      <strong>Abrir no Drive →</strong>
-    </a>
-  </section>
-
-  <p class="tip">Toque no play e use tela cheia. Gire o celular na horizontal para ver melhor.</p>
-
+<section class="info">
+  <div class="logo"><img src="carneiro.png" alt="Carneiro Run"></div>
+  <h1>Maratona</h1>
+  <a class="btn" href="https://drive.google.com/file/d/1ThdGfZ3WY53U97byx2wXh06xcu1AXNBZ/view?usp=sharing" target="_blank" rel="noopener">Abrir no app do Drive</a>
+  <p class="tip">Se o vídeo não tocar acima, use o botão para abrir direto no Drive.</p>
   <footer>Filmagem e edição · Breno Madeira · @brenomadeira</footer>
-</main>
+</section>
+
 </body>
 </html>
